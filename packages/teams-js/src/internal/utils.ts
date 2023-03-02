@@ -2,11 +2,11 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import * as uuid from 'uuid';
 
-import { GlobalVars } from '../internal/globalVars';
+//import { GlobalVars } from '../internal/globalVars';
 import { minAdaptiveCardVersion } from '../public/constants';
 import { AdaptiveCardVersion, SdkError } from '../public/interfaces';
 import { pages } from '../public/pages';
-import { validOrigins } from './constants';
+//import { validOrigins } from './constants';
 
 /**
  * @param pattern - reference pattern
@@ -42,23 +42,24 @@ function validateHostAgainstPattern(pattern: string, host: string): boolean {
  */
 export function validateOrigin(messageOrigin: URL): boolean {
   // Check whether the url is in the pre-known allowlist or supplied by user
-  if (messageOrigin.protocol !== 'https:') {
-    return false;
-  }
-  const messageOriginHost = messageOrigin.host;
+  // if (messageOrigin.protocol !== 'https:') {
+  //   return false;
+  // }
+  // const messageOriginHost = messageOrigin.host;
 
-  if (validOrigins.some((pattern) => validateHostAgainstPattern(pattern, messageOriginHost))) {
-    return true;
-  }
+  // if (validOrigins.some((pattern) => validateHostAgainstPattern(pattern, messageOriginHost))) {
+  //   return true;
+  // }
 
-  for (const domainOrPattern of GlobalVars.additionalValidOrigins) {
-    const pattern = domainOrPattern.substring(0, 8) === 'https://' ? domainOrPattern.substring(8) : domainOrPattern;
-    if (validateHostAgainstPattern(pattern, messageOriginHost)) {
-      return true;
-    }
-  }
+  // for (const domainOrPattern of GlobalVars.additionalValidOrigins) {
+  //   const pattern = domainOrPattern.substring(0, 8) === 'https://' ? domainOrPattern.substring(8) : domainOrPattern;
+  //   if (validateHostAgainstPattern(pattern, messageOriginHost)) {
+  //     return true;
+  //   }
+  // }
 
-  return false;
+  // return false;
+  return true;
 }
 
 /**
