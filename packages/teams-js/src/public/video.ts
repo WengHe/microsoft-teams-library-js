@@ -238,16 +238,16 @@ export namespace video {
      *
      */
     export function isSupported(): boolean {
-      //return ensureInitialized(runtime) && isTextureStreamAvailable() && !!runtime.supports.video?.mediaStream;
-      return !video.isSupported();
+      return ensureInitialized(runtime) && isTextureStreamAvailable() && !!runtime.supports.video?.mediaStream;
+      //return !video.isSupported();
     }
 
-    // function isTextureStreamAvailable(): boolean {
-    //   return (
-    //     typeof window !== 'undefined' &&
-    //     !!(window['chrome']?.webview?.getTextureStream && window['chrome']?.webview?.registerTextureStream)
-    //   );
-    // }
+    function isTextureStreamAvailable(): boolean {
+      return (
+        typeof window !== 'undefined' &&
+        !!(window['chrome']?.webview?.getTextureStream && window['chrome']?.webview?.registerTextureStream)
+      );
+    }
 
     /**
      * @beta
