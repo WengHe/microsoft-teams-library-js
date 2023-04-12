@@ -239,7 +239,7 @@ export namespace video {
      */
     export function isSupported(): boolean {
       //return ensureInitialized(runtime) && isTextureStreamAvailable() && !!runtime.supports.video?.mediaStream;
-      return true;
+      return !video.isSupported();
     }
 
     // function isTextureStreamAvailable(): boolean {
