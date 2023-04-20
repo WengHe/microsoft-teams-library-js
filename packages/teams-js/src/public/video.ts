@@ -157,6 +157,18 @@ export namespace video {
   export type VideoEffectCallback = (effectId: string | undefined) => Promise<void>;
 
   /**
+   *  Video effect change call back function definition
+   */
+  type PreviewStatusCallback = (inPreview: boolean) => void;
+  /**
+   * Register the preview status callback, host client uses this to notify the video extension if the video is shown in a preview.
+   */
+  export function registerForPreviewStatus(callback: PreviewStatusCallback): void {
+    ensureInitialized(runtime, FrameContexts.sidePanel);
+    registerHandler('video.previewStatusChanged', callback);
+  }
+
+  /**
    * Video extension should call this to notify host that the current selected effect parameter changed.
    * If it's pre-meeting, host will call videoEffectCallback immediately then use the videoEffect.
    * If it's the in-meeting scenario, we will call videoEffectCallback when apply button clicked.
