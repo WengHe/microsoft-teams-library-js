@@ -285,6 +285,7 @@ export namespace video {
      * });
      * ```
      */
+    let frameCount = 0;
     export function registerForVideoFrame(frameCallback: VideoFrameCallback): void {
       ensureInitialized(runtime, FrameContexts.sidePanel);
       if (!isSupported()) {
@@ -298,6 +299,10 @@ export namespace video {
         const generator = createProcessedStreamGenerator(videoTrack, frameCallback);
         // register the video track with processed frames back to the stream:
         typeof window !== 'undefined' && window['chrome']?.webview?.registerTextureStream(streamId, generator);
+        setInterval(() => {
+          console.log(`fps: ${frameCount / 60}`);
+          frameCount = 0;
+        }, 1000 * 60);
       });
 
       sendMessageToParent('video.mediaStream.registerForVideoFrame', [
@@ -363,6 +368,7 @@ export namespace video {
                   controller.enqueue(processedFrame);
                   originalFrame.close();
                   frameProcessedByApp.close();
+                  frameCount++;
                 } catch (error) {
                   originalFrame.close();
                   notifyError(error);
